@@ -5,6 +5,8 @@ const Actions = require('../data/helpers/actionModel');
 
 const router = express.Router();
 
+router.use(express.json());
+
 // custom middleware
 function validateProjectId(req, res, next) {
     if (req.params.id) {
@@ -34,3 +36,37 @@ function validateAction(req, res, next) {
 }
 
 // get requests
+router.get('/', (req, res) => {
+    Projects.get(req.query)
+    .then(projects => {
+        res.status(200).json(projects)
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json({error: 'Unable to retrieve projects'})
+    })
+})
+
+router.get('/:id', validateProjectId, (req, res) => {
+    Projects.get(req.params.id)
+    .then(project => {
+        res.status(200).json(project)
+    })
+    .catch(err => {
+        console.log(err)
+        res.status(500).json({error: 'Unable to retrieve project'})
+    })
+})
+
+router.get('/:id/actions', (req, res) => {
+    Projects.getProjectActions(res.params.id)
+    .then(action => {
+        res.status(200).json(action)
+    })
+    .catch(err => {
+        console.log(err)
+        res.status(500).json({error: 'Unable to retrieve actions'})
+    })
+})
+
+module.exports = router;

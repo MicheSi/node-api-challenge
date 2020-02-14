@@ -15,23 +15,7 @@ Go code!
 
 require('dotenv').config();
 
-const express = require('express');
-const helmet = require('helmet');
-
-const projectRouter = require('./routers/projectRouter');
-const actionRouter = require('./routers/actionRouter');
-
-const server = express();
-
-server.use(express.json());
-server.use(helmet());
-
-server.use('/projects', projectRouter);
-server.use('/actions', actionRouter);
-
-server.get('/', (req, res) => {
-    res.send(`<h2>Server is running<h2>`);
-});
+const server = require('./server');
 
 const port = process.env.PORT || 5000;
 server.listen(port, () => console.log(`\n** Server is running on port ${port} **\n`));
