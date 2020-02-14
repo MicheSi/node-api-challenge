@@ -16,10 +16,18 @@ Go code!
 require('dotenv').config();
 
 const express = require('express');
+const helmet = require('helmet');
+
+const projectRouter = require('./routers/projectRouter');
+const actionRouter = require('./routers/actionRouter');
 
 const server = express();
 
 server.use(express.json());
+server.use(helmet());
+
+server.use('/projects', projectRouter);
+server.use('/actions', actionRouter);
 
 server.get('/', (req, res) => {
     res.send(`<h2>Server is running<h2>`);
