@@ -1,0 +1,16 @@
+html, body {
+  box-sizing: border-box;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-top: 2%;
+}
+
+.projectCard {
+  margin: 5% 0 3%;
+}
+

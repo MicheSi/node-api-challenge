@@ -40,13 +40,23 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 - [ ] Mention two parts of Express that you learned about this week.
 
+Routing & Middleware
+
 - [ ] Describe Middleware?
+
+It’s an array of functions that get executed into the server code (based on the order the middleware is introduced). It’s used to add extra functionality to the app. It is commonly used for authentication and logging.
 
 - [ ] Describe a Resource?
 
+Everything in a RESTful API is a resource. Each resource can be accessed via a unique URI/URL. They are managed via HTTP methods.
+
 - [ ] What can the API return to help clients know if a request was successful?
 
+A response status code of 200 or 201, along with a message or the object that was sent.
+
 - [ ] How can we partition our application into sub-applications?
+
+Using Express Routers.
 
 ## Minimum Viable Product
 
