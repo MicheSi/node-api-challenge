@@ -35,7 +35,7 @@ function validateAction(req, res, next) {
     }
 }
 
-// get requests
+// get all projects
 router.get('/', (req, res) => {
     Projects.get()
     .then(projects => {
@@ -46,7 +46,7 @@ router.get('/', (req, res) => {
         res.status(500).json({error: 'Unable to retrieve projects'})
     })
 })
-
+// get project by id
 router.get('/:id', validateProjectId, (req, res) => {
     Projects.get(req.params.id)
     .then(project => {
@@ -57,9 +57,9 @@ router.get('/:id', validateProjectId, (req, res) => {
         res.status(500).json({error: 'Unable to retrieve project'})
     })
 })
-
-router.get('/:id/actions', (req, res) => {
-    Projects.getProjectActions(res.params.id)
+//get project actions
+router.get('/:id/actions', validateProjectId, (req, res) => {
+    Projects.getProjectActions(req.params.id)
     .then(action => {
         res.status(200).json(action)
     })
@@ -68,7 +68,7 @@ router.get('/:id/actions', (req, res) => {
         res.status(500).json({error: 'Unable to retrieve actions'})
     })
 })
-
+// add new project
 router.post('/', validateProject, (req, res) => {
     Projects.insert(req.body)
     .then(project => {
@@ -79,7 +79,7 @@ router.post('/', validateProject, (req, res) => {
         res.status(500).json({error: 'Unable to create project'})
     })
 })
-
+// update project
 router.put('/:id', validateProject, validateProjectId, (req, res) => {
     Projects.update(req.params.id, req.body)
     .then(project => {
@@ -90,7 +90,7 @@ router.put('/:id', validateProject, validateProjectId, (req, res) => {
         res.status(500).json({error: 'Unable to update project'})
     })
 })
-
+// delete project
 router.delete('/:id', validateProjectId, (req, res) => {
     Projects.remove(req.params.id)
     .then(project => {
@@ -102,4 +102,4 @@ router.delete('/:id', validateProjectId, (req, res) => {
     })
 })
 
-module.exports = router;
+module.exports = router, validateProject, validateProjectId;
