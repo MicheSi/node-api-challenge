@@ -37,7 +37,7 @@ function validateAction(req, res, next) {
 
 // get requests
 router.get('/', (req, res) => {
-    Projects.get(req.query)
+    Projects.get()
     .then(projects => {
         res.status(200).json(projects)
     })
