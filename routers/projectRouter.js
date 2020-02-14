@@ -69,4 +69,37 @@ router.get('/:id/actions', (req, res) => {
     })
 })
 
+router.post('/', validateProject, (req, res) => {
+    Projects.insert(req.body)
+    .then(project => {
+        res.status(200).json(project)
+    })
+    .catch(err => {
+        console.log(err)
+        res.status(500).json({error: 'Unable to create project'})
+    })
+})
+
+router.put('/:id', validateProject, validateProjectId, (req, res) => {
+    Projects.update(req.params.id, req.body)
+    .then(project => {
+        res.status(200).json(project)
+    })
+    .catch(err => {
+        console.log(err)
+        res.status(500).json({error: 'Unable to update project'})
+    })
+})
+
+router.delete('/:id', validateProjectId, (req, res) => {
+    Projects.remove(req.params.id)
+    .then(project => {
+        res.status(200).json(project)
+    })
+    .catch(err => {
+        console.log(err)
+        res.status(500).json({error: 'Unable to delete project'})
+    })
+})
+
 module.exports = router;
